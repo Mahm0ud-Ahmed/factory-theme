@@ -10,11 +10,12 @@ class ThemeManager extends ChangeNotifier{
   late ThemeMode _mode;
 
   void initTheme(ITheme argTheme){
-    if(argTheme is LightTheme){
-      theme = LightTheme();
-    }else{
-      theme = DarkTheme();
-    }
+    // if(argTheme is LightTheme){
+    //   theme = LightTheme();
+    // }else{
+    //   theme = DarkTheme();
+    // }
+    theme = argTheme;
     theme.appColor;
     theme.appStyle;
     setMode(theme);
