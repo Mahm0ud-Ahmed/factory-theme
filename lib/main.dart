@@ -63,11 +63,11 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'You have pushed the button this many times:',
-              style: ThemeManager().theme?.style[ThemeTextStyle.body]
+              style: ThemeManager().theme.style[ThemeTextStyle.body]
             ),
             Text(
               '$_counter',
-              style: ThemeManager().theme?.style[ThemeTextStyle.body]
+              style: ThemeManager().theme.style[ThemeTextStyle.body]
             ),
           ],
         ),
