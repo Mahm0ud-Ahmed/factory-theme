@@ -6,30 +6,35 @@ import 'package:my_app/theme/theme_manager.dart';
 
 void main() {
   final ThemeManager theme = ThemeManager();
-  theme.initTheme(DarkTheme());
+  theme.initTheme(LightTheme());
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
 
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeManager().theme.theme,
-      darkTheme: ThemeManager().theme.theme,
-      themeMode: ThemeManager().theme.mode,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return AnimatedBuilder(
+      animation: Listenable.merge([ThemeManager()]),
+      builder: (context, childe){
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeManager().myTheme,
+          darkTheme: ThemeManager().myTheme,
+          themeMode: ThemeManager().mode,
+          home: MyHomePage(title: 'Flutter Demo Home Page'),
+        );
+      },
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -48,8 +53,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
-    print('first page');
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -58,12 +61,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
+            Text(
               'You have pushed the button this many times:',
+              style: ThemeManager().theme?.style[ThemeTextStyle.body]
             ),
             Text(
               '$_counter',
-              style: ThemeManager().theme.style[ThemeTextStyle.body]
+              style: ThemeManager().theme?.style[ThemeTextStyle.body]
             ),
           ],
         ),
@@ -71,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
       ),
     );
   }
@@ -90,30 +94,26 @@ class _SecondPageState extends State<SecondPage> {
     print('second page');
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Second Page'),
+        title: Text('Second Page'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const Text('Second Page'),
+            Text('Second Page'),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  ThemeManager().initTheme(DarkTheme());
-                });
+                ThemeManager().initTheme(DarkTheme());
               },
-              child: const Text('Dark Mode'),
+              child: Text('Dark Mode'),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  ThemeManager().initTheme(LightTheme());
-                });
+                ThemeManager().initTheme(LightTheme());
               },
-              child: const Text('Lite Mode'),
+              child: Text('Lite Mode'),
             ),
           ],
         ),

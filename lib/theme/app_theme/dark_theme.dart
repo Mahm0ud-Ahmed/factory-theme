@@ -10,9 +10,6 @@ class DarkTheme implements ITheme{
   late Map<ThemeTextStyle, TextStyle> style;
 
   @override
-  late ThemeData themeData;
-
-  @override
   MaterialColor primarySwatch = Colors.indigo;
 
   @override
@@ -33,19 +30,5 @@ class DarkTheme implements ITheme{
       ThemeTextStyle.subtitle2 : TextStyle(color: color[0], fontSize: 40,),
     };
   }
-  
-  @override
-  ThemeData get theme {
-    return themeData = ThemeData(
-      scaffoldBackgroundColor: color[0],
-      primarySwatch: primarySwatch,
-      appBarTheme: AppBarTheme(color: primarySwatch),
-      brightness: Brightness.dark,
-    );
-  }
-  
-  @override
-  ThemeMode mode = ThemeMode.dark;
-  
 
 }

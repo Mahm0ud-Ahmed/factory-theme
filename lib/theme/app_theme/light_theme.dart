@@ -10,9 +10,6 @@ class LightTheme implements ITheme{
   late Map<ThemeTextStyle, TextStyle> style;
 
   @override
-  late ThemeData themeData;
-
-  @override
   MaterialColor primarySwatch = Colors.blue;
 
   @override
@@ -33,20 +30,6 @@ class LightTheme implements ITheme{
       ThemeTextStyle.subtitle2 : TextStyle(color: color[0], fontSize: 40,),
     };
   }
-
-  @override
-  ThemeData get theme {
-    return themeData = ThemeData(
-      scaffoldBackgroundColor: color[0],
-      primarySwatch: primarySwatch,
-      brightness: Brightness.dark,
-      appBarTheme: AppBarTheme(color: primarySwatch),
-
-    );
-  }
-  
-  @override
-  ThemeMode mode = ThemeMode.light;
   
 
 }
